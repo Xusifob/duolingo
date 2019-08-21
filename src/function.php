@@ -28,7 +28,7 @@ function dump(...$var)
 function return_response($data,$status = 200)
 {
     header("Content-type:application/json");
-    header(http_response_code($status));
+    http_response_code($status);
 
     if(is_array($data)) {
         $data['status'] = $status;
