@@ -1,0 +1,153 @@
+.loading-container {
+    position: absolute;
+    background: #ffffffd1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.loading-bar {
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    border-radius: 4px;
+    animation: loading 1s ease-in-out infinite;
+}
+.loading-bar:nth-child(1) {
+    background-color: #3498db;
+    animation-delay: 0ms;
+}
+.loading-bar:nth-child(2) {
+    background-color: #c0392b;
+    animation-delay: 0.09s;
+}
+.loading-bar:nth-child(3) {
+    background-color: #f1c40f;
+    animation-delay: .18s;
+}
+.loading-bar:nth-child(4) {
+    background-color: #27ae60;
+    animation-delay: .27s;
+}
+
+@keyframes loading {
+    0% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(1, 2.2);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+.on-tooltip {
+    position: relative;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.the-tooltip .fa-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.the-tooltip table {
+    margin: 40px 0;
+}
+
+.the-tooltip {
+    position: absolute;
+    background: #fff;
+    border: 1px solid grey;
+    top: 0;
+    width: auto;
+    padding: 15px;
+    cursor: initial;
+    z-index: 999;
+}
+
+.sentence i {
+    color: #0acdda;
+    cursor: pointer;
+}
+
+* {
+    font-family: 'Noto Sans SC', sans-serif;
+}
+span.highlighted {
+    color: #134f9e;
+    font-weight: bold;
+}
+
+p em {
+    display: block;
+}
+
+i.play {
+    font-size: 25px;
+    color: #0acdda;
+    cursor: pointer;
+}
+
+.only-mobile {
+    display: none;
+}
+
+@media(max-width: 762px) {
+
+    .only-mobile {
+        display: initial;
+    }
+    .table > tbody > tr > td {
+        display: block;
+    }
+    .table > tbody > tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 2px solid black;
+    }
+    .table > thead {
+        display: none;
+    }
+
+    .the-tooltip {
+        width: 100% !important;
+        left 0;
+        position: fixed;
+        right: 0;
+        top:0;
+        bottom :0;
+        overflow: scroll;
+    }
+}
+
+.sr-only {
+    display: none !important;
+}
+
+.form-top {
+    position: fixed;
+    background: #fff;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding-top: 20px;
+    box-shadow: 2px -2px 10px 0 rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+
+input[type="password"] {
+    font-family: Arial;
+}
