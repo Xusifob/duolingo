@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<div class="container" style="margin-top: 100px;">
+<div class="container content">
     <table id="table" class="table table-stripped">
         <thead>
         <tr>
