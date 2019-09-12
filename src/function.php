@@ -36,3 +36,33 @@ function return_response($data,$status = 200)
 
     die(json_encode($data,JSON_PRETTY_PRINT));
 }
+
+
+/**
+ * @param $key
+ * @param $value
+ */
+function addCookie($key,$value)
+{
+    setcookie($key,$value,time()+365*60*60*24,"/");
+
+}
+
+
+/**
+ * @param $array
+ * @param int $nb
+ * @return mixed
+ */
+function get_array_random($array,$nb = 10)
+{
+    $r = array_rand($array,$nb);
+    shuffle($r);
+    $random = array();
+
+    foreach ($r as $item) {
+        $random[] = $array[$item];
+    }
+
+    return $random;
+}

@@ -18,6 +18,43 @@ class DB
 
 
     /**
+     * @return bool|mixed
+     */
+    public function getUserWords()
+    {
+        return $this->get("users/{$_COOKIE['user']}/words/{$_COOKIE['learning_language']}-{$_COOKIE['user_language']}");
+
+    }
+
+    /**
+     *
+     * @param $word
+     * @return Word|null
+     */
+    public function getWord($word) : ?Word
+    {
+        $w = $this->get("words/{$_COOKIE['learning_language']}-{$_COOKIE['user_language']}/{$word}");
+
+        if(!$w) {
+            return null;
+        }
+
+        return new Word($w);
+
+
+    }
+
+
+    /**
+     * @return bool|mixed
+     */
+    public function getSkills()
+    {
+        return $this->get("skills/{$_COOKIE['learning_language']}-{$_COOKIE['user_language']}");
+    }
+
+
+    /**
      *
      * Get data from database
      *

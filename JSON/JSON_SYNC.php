@@ -1,6 +1,6 @@
 <?php
 
-include '../header.php';
+include 'header.php';
 
 
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -83,6 +83,10 @@ foreach($overview['vocab_overview'] as $vocab) {
 }
 
 $db->write("users/{$login['user_id']}/words/{$learning}-{$userLanguage}",$words);
+
+addCookie('user_language',$userLanguage);
+addCookie('learning_language',$learning);
+addCookie('user',$login['user_id']);
 
 return_response(array(
     'words' => $words,

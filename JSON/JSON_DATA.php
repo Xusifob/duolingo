@@ -1,10 +1,7 @@
 <?php
 
-include '../header.php';
+include 'header.php';
 
-if(!isset($_GET['user']) || !isset($_GET['from']) || !isset($_GET['to'])) {
-    return_response(array("error" => "User must be defined"),400);
-}
 
 $offset = 0;
 
@@ -31,7 +28,7 @@ if(isset($_GET['length'])) {
 }
 
 
-$user_words = $db->get("users/{$_GET['user']}/words/{$_GET['from']}-{$_GET['to']}");
+$user_words = $db->getUserWords();
 
 if(!$user_words) {
     return_response(array("error" => "No data is found, please sync your values first"),404);
@@ -41,7 +38,7 @@ $words = array();
 
 foreach ($user_words as $word) {
 
-    $word = $db->get("words/{$_GET['from']}-{$_GET['to']}/{$word}");
+    $word = $db->getWord($word);
     if(!$word) {
         // The word is not in the database, you need to sync it
         continue;

@@ -1,11 +1,12 @@
 <?php
 
+use Cocur\Slugify\Slugify;
+
 /**
  * Class Word
  */
 class Word extends Builder implements JsonSerializable
 {
-
 
     /**
      *
@@ -72,7 +73,7 @@ class Word extends Builder implements JsonSerializable
     protected $audio;
 
     /**
-     * @var \Cocur\Slugify\Slugify
+     * @var Slugify
      */
     protected $slugify;
 
@@ -84,6 +85,15 @@ class Word extends Builder implements JsonSerializable
 
 
     /**
+     *
+     * Some words linked
+     *
+     * @var Word[]
+     */
+    protected $words = array();
+
+
+    /**
      * Word constructor.
      * @param array $data
      */
@@ -92,6 +102,7 @@ class Word extends Builder implements JsonSerializable
         parent::__construct($data);
 
         $this->slugify = new \Cocur\Slugify\Slugify();
+
     }
 
 
@@ -277,11 +288,11 @@ class Word extends Builder implements JsonSerializable
      * @param string $category
      * @return bool
      */
-    public function hasCategory(string  $category)
+    public function hasCategory(?string $category)
     {
 
         if(!$category) {
-            return  true;
+            return true;
         }
 
         if(!$this->getCategory()) {
@@ -319,6 +330,10 @@ class Word extends Builder implements JsonSerializable
     }
 
 
+
+
+
+
     /**
      * @return array|mixed
      */
@@ -334,8 +349,27 @@ class Word extends Builder implements JsonSerializable
             'sentences' => $this->getSentences(),
             'slug' => $this->getSlug(),
             'category' => $this->getCategory(),
-            'course' => $this->getCourse()
+            'course' => $this->getCourse(),
+            'words' => $this->getWords()
         );
+    }
+
+
+    /**
+     * @return Word[]
+     */
+    public function getWords()
+    {
+        shuffle($this->words);
+        return $this->words;
+    }
+
+    /**
+     * @param Word $word
+     */
+    public function addWord(Word $word)
+    {
+        $this->words[] = $word;
     }
 
 }
