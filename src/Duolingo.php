@@ -159,7 +159,7 @@ class Duolingo
             case 'zs' :
                 $string = urlencode($string);
 
-                $data = file_get_contents('https://glosbe.com/transliteration/api?from=Han&dest=Latin&text='. $string .'&format=json');
+                $data = file_get_contents('https://mapi.glosbe.com/transliteration/api?from=Han&dest=Latin&text='. $string .'&format=json');
 
                 return json_decode($data, true)['text'];
                 break;
