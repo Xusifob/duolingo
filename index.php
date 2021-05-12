@@ -30,7 +30,7 @@
             <th>Original</th>
             <th>Phonetic</th>
             <th class="sr-only">Slug</th>
-            <th>English</th>
+            <th>Translation</th>
             <th>Category</th>
             <th>Phrases</th>
             <th><i class="fas fa-volume-down"></i></th>
