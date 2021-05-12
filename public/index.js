@@ -95,6 +95,9 @@ function loadSkills() {
  */
 function loadData(wipe) {
 
+    setCookie("learning_language",localStorage.getItem('learning_language'));
+    setCookie("user_language",localStorage.getItem('user_language'));
+
     from = localStorage.getItem('learning_language');
     to = localStorage.getItem('user_language');
 
@@ -123,7 +126,24 @@ function loadData(wipe) {
             return;
         }
 
-        $('input[name="lang"]').val(data.currentLanguage);
+        let $lang =         $('select[name="lang"]');
+
+        data.languages.forEach((l) => {
+            console.log(l);
+            $lang.append('<option value="'+ l +'" >'+ l +'</option>');
+        });
+        $lang.val(data.currentLanguage);
+
+        $lang.on('change',() => {
+
+            let v = $lang.val();
+
+            v = v.split('-');
+            localStorage.setItem('learning_language',v[0]);
+            localStorage.setItem('user_language',v[1]);
+            document.location.reload();
+        });
+
 
         data.data.forEach(function (val) {
 
@@ -223,3 +243,11 @@ $(document).ready(function() {
         }
     });
 });
+
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}

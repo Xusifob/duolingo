@@ -50,9 +50,7 @@ $(document).ready(function () {
     $('.validate-game').on('click',function () {
 
         let t = translation.find('.active').attr('word');
-        if(hasPhonetic()) {
-            let p = phonetic.find('.active').attr('word');
-        }
+        let p = phonetic.find('.active').attr('word');
         let m = main_game.attr('word');
 
         let isvalid = hasPhonetic() ? (t == m) && (p == m) : (t == m);
