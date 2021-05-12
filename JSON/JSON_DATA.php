@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors',1);
+
 include 'header.php';
 
 
@@ -58,6 +60,8 @@ foreach ($user_words as $word) {
 
 }
 
+$languages = $db->getUserLanguages();
+
 
 $count = count($words);
 
@@ -69,4 +73,6 @@ return_response(array(
     'offset' => $offset,
     'length' => $length,
     'request' => $_GET,
+    'languages' => $languages,
+    'currentLanguage' => $_COOKIE['learning_language'] . "-" . $_COOKIE['user_language']
 ));

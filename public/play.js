@@ -1,6 +1,10 @@
-let category,phonetic,translation,word,main_game,i;
+let category,phonetic,translation,word,main_game,i,lang;
 
 let words = [];
+
+let url = new URL(document.location.href);
+category = url.searchParams.get("category");
+lang = url.searchParams.get("lang");
 
 $(document).ready(function () {
 
@@ -8,23 +12,25 @@ $(document).ready(function () {
     translation = $('.translation');
     main_game = $('.main-game');
 
-    let url = new URL(document.location.href);
-    category = url.searchParams.get("category");
+
 
     user_id = localStorage.getItem('user_id');
 
     launch();
 
 
-    phonetic.find('.secondary-game').on('click',function () {
-        phonetic.find('.secondary-game').removeClass('error').removeClass('active');
+    if(hasPhonetic()) {
+        phonetic.find('.secondary-game').on('click', function () {
+            phonetic.find('.secondary-game').removeClass('error').removeClass('active');
 
-        $(this).addClass('active');
+            $(this).addClass('active');
 
-        handleValidateButton();
+            handleValidateButton();
 
-    });
-
+        });
+    } else {
+        phonetic.hide();
+    }
     translation.find('.secondary-game').on('click',function () {
         translation.find('.secondary-game').removeClass('error').removeClass('active');
 
@@ -44,18 +50,23 @@ $(document).ready(function () {
     $('.validate-game').on('click',function () {
 
         let t = translation.find('.active').attr('word');
-        let p = phonetic.find('.active').attr('word');
+        if(hasPhonetic()) {
+            let p = phonetic.find('.active').attr('word');
+        }
         let m = main_game.attr('word');
 
+        let isvalid = hasPhonetic() ? (t == m) && (p == m) : (t == m);
 
         if(t != m ) {
             translation.find('.active').removeClass('active').addClass('error');
         }
-        if(p != m) {
-            phonetic.find('.active').removeClass('active').addClass('error');
+        if(hasPhonetic()) {
+            if (p != m) {
+                phonetic.find('.active').removeClass('active').addClass('error');
+            }
         }
 
-        if((t == m) && (p == m)) {
+        if(isvalid) {
             $('.success').fadeIn(100);
             i++;
 
@@ -118,11 +129,13 @@ function startGame() {
 
     a = shuffle([0,1,2,3]);
 
-    phonetic.find('.secondary-game').each(function (k, e) {
-        let w = word.words[a[k]];
-        $(e).html(w.phonetic);
-        $(e).attr('word',w.word);
-    });
+    if(hasPhonetic()) {
+        phonetic.find('.secondary-game').each(function (k, e) {
+            let w = word.words[a[k]];
+            $(e).html(w.phonetic);
+            $(e).attr('word', w.word);
+        });
+    }
 
     setTimeout(function () {
         loading(false);
@@ -149,9 +162,25 @@ function launch() {
  */
 function handleValidateButton() {
 
-    if(translation.find('.active').length === 1 && phonetic.find('.active').length === 1) {
-        $('.validate-game').removeClass('disabled').prop('disabled',false);
+    let valid;
+
+    if(hasPhonetic()) {
+        valid = translation.find('.active').length === 1 && phonetic.find('.active').length === 1;
     } else {
-        $('.validate-game').addClass('disabled').prop('disabled',true);
+        valid = translation.find('.active').length === 1;
     }
+
+    $('.validate-game').toggleClass('disabled',!valid).prop('disabled', !valid);
+
+}
+
+
+/**
+ *
+ * @return {boolean}
+ */
+hasPhonetic = () => {
+
+    return ['zs-en'].indexOf(lang) !== -1;
+
 }

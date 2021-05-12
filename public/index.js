@@ -123,6 +123,8 @@ function loadData(wipe) {
             return;
         }
 
+        $('input[name="lang"]').val(data.currentLanguage);
+
         data.data.forEach(function (val) {
 
             let template = $($('#row').html());

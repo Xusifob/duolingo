@@ -27,6 +27,25 @@ class DB
     }
 
     /**
+     * @return bool|mixed
+     */
+    public function getUserLanguages()
+    {
+
+        $diff = array_values(array_diff(scandir("{$this->dir}users/{$_COOKIE['user']}/words"),['.','..']));
+
+        $diff = array_map(function ($val) {
+            $ext = pathinfo($val,PATHINFO_EXTENSION);
+
+            return str_replace(".$ext","",$val);
+
+        },$diff);
+
+        return $diff;
+
+    }
+
+    /**
      *
      * @param $word
      * @return Word|null

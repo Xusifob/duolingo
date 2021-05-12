@@ -12,6 +12,7 @@
                     <option value="">Filter by category</option>
                 </select>
             </div>
+            <input type="hidden" name="lang">
             <div class="form-group mx-sm-4 mb-3">
                 <button class="btn btn-primary" type="button"  data-toggle="modal" data-target="#modal-login" ><i class="fa fa-sync"></i></button>
                 <button type="submit" style="margin-left: 5px;" class="btn btn-success" ><i class="fa fa-play"></i></button>
@@ -24,7 +25,7 @@
     <table id="table" class="table table-stripped">
         <thead>
         <tr>
-            <th>Chinese</th>
+            <th>Original</th>
             <th>Phonetic</th>
             <th class="sr-only">Slug</th>
             <th>English</th>
